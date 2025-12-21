@@ -37,6 +37,7 @@ jobs:
 
   custom_secret_detection:
     runs-on: ubuntu-latest
+    needs: [checkout]
     steps:
       - run: echo "stage secret"
 
