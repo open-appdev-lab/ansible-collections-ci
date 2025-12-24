@@ -1,0 +1,80 @@
+name: Placeholder stage name
+
+on:
+  workflow_call:
+    # inputs:
+    #   environment:
+    #     required: true
+    #     type: string
+    # secrets:
+    #   API_KEY:
+    #     required: true
+
+jobs:
+  secret_detection:
+    runs-on: ubuntu-latest
+    # environment: ${{ inputs.environment }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run local action
+      id: custom-action1
+      uses: ./.github/actions/dummy
+      with:
+        placeholder-input1: 'GitHub Actions'
+
+    - name: Print Output
+    #   env:
+    #     KEY: ${{ secrets.API_KEY }}
+      run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"
+
+  automation-hub-verify-ansible-lint:
+    runs-on: ubuntu-latest
+    # environment: ${{ inputs.environment }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run local action
+      id: custom-action1
+      uses: ./.github/actions/dummy
+      with:
+        placeholder-input1: 'GitHub Actions'
+
+    - name: Print Output
+    #   env:
+    #     KEY: ${{ secrets.API_KEY }}
+      run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"
+
+  job-ansible-tox-sanity:
+    runs-on: ubuntu-latest
+    # environment: ${{ inputs.environment }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run local action
+      id: custom-action1
+      uses: ./.github/actions/dummy
+      with:
+        placeholder-input1: 'GitHub Actions'
+
+    - name: Print Output
+    #   env:
+    #     KEY: ${{ secrets.API_KEY }}
+      run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"
+
+  job-ansible-tox-integration:
+    runs-on: ubuntu-latest
+    # environment: ${{ inputs.environment }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run local action
+      id: custom-action1
+      uses: ./.github/actions/dummy
+      with:
+        placeholder-input1: 'GitHub Actions'
+
+    - name: Print Output
+    #   env:
+    #     KEY: ${{ secrets.API_KEY }}
+      run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"

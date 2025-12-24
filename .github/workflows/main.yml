@@ -11,7 +11,7 @@ on:
 
 jobs:
   secrets:
-    uses: ./.github/workflows/_dummy-stage.yml
+    uses: ./.github/workflows/_secrets-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
@@ -19,7 +19,7 @@ jobs:
 
   prepare:
     needs: secrets
-    uses: ./.github/workflows/_dummy-stage.yml
+    uses: ./.github/workflows/_prepare-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
@@ -27,7 +27,7 @@ jobs:
 
   test:
     needs: prepare
-    uses: ./.github/workflows/_dummy-stage.yml
+    uses: ./.github/workflows/_test-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
@@ -35,7 +35,7 @@ jobs:
 
   report:
     needs: test
-    uses: ./.github/workflows/_dummy-stage.yml
+    uses: ./.github/workflows/_report-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
@@ -43,7 +43,7 @@ jobs:
 
   release:
     needs: report
-    uses: ./.github/workflows/_dummy-stage.yml
+    uses: ./.github/workflows/_release-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
@@ -51,7 +51,7 @@ jobs:
 
   publish:
     needs: release
-    uses: ./.github/workflows/_dummy-stage.yml
+    uses: ./.github/workflows/_publish-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
