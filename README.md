@@ -1,5 +1,21 @@
-curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+# Local development using act
 
+1. Local Setup
+
+- Using docker alias to podman
+- Using rootless podman with unix socket
+
+```bash
+# Install using GitHub CLI
+gh extension install https://github.com/nektos/gh-act
+systemctl --user start podman.socket
+export DOCKER_HOST="unix:///run/user/$(id -u)/podman/podman.sock"
+
+alias act="DOCKER_HOST=unix:///run/user/$(id -u)/podman/podman.sock gh act -P ubuntu-latest=docker.io/catthehacker/ubuntu:act-latest --pull=false"
+
+
+act -W .github/workflows/main.yml 
+```
 
 2. The Setup (Handling Secrets)
 Your pipeline uses STAGING_API_KEY. You don't want to hardcode this. Create a file named .secrets in your project root (add this to .gitignore so you don't commit it!).
