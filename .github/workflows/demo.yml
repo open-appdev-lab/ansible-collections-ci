@@ -35,3 +35,17 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+  docker-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Docker Action
+        id: my-docker
+        uses: ./.github/actions/dummy-container-task
+        with:
+          who-to-greet: 'Container User'
+
+      - name: View Output
+        run: echo "The container used memory: ${{ steps.my-docker.outputs.memory }}"
