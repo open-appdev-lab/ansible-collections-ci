@@ -50,7 +50,7 @@ jobs:
     #   API_KEY: ${{ secrets.STAGING_KEY }}
 
   publish:
-    needs: report
+    needs: release
     uses: ./.github/workflows/_dummy-stage.yml
     # with:
     #   environment: 'staging'
