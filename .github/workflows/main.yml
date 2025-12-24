@@ -16,12 +16,21 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  secrets-stage:
+  secrets:
     uses: ./.github/workflows/_secrets-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
     #   API_KEY: ${{ secrets.STAGING_KEY }}
+
+  dummy:
+    needs: secrets
+    uses: ./.github/workflows/_dummy-stage.yml
+    # with:
+    #   environment: 'staging'
+    # secrets_
+    #   API_KEY: ${{ secrets.STAGING_KEY }}
+
 
   # This workflow contains a single job called "build"
   checkout:
