@@ -90,11 +90,11 @@ jobs:
     secrets:
       API_KEY: ${{ secrets.PROD_API_KEY }}
 
-    # 1. Links to Repo Settings > Environments > production
-    #    (Where you configured "Required Reviewers")
-    environment: 
-      name: production
-      url: https://my-app-production.com
+    # # 1. Links to Repo Settings > Environments > production
+    # #    (Where you configured "Required Reviewers")
+    # environment: 
+    #   name: production
+    #   url: https://my-app-production.com
 
     # 2. JOB-LEVEL CONCURRENCY (Safety)
     #    Ensures deployments run one at a time (Queueing).
