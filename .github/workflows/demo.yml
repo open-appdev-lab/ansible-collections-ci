@@ -48,4 +48,4 @@ jobs:
           who-to-greet: 'Container User'
 
       - name: View Output
-        run: echo "The container used memory: ${{ steps.my-docker.outputs.memory }}"
+        run: echo "The container used memory ${{ steps.my-docker.outputs.memory }}"
