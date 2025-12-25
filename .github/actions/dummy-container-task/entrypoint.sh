@@ -14,4 +14,4 @@ jq --version
 MEMORY_USAGE=$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')
 
 # Set an output for the workflow to use later
-echo "memory-usage=$MEMORY_USAGE" >> "$GITHUB_OUTPUT"
+echo "memory=$MEMORY_USAGE" >> "$GITHUB_OUTPUT"

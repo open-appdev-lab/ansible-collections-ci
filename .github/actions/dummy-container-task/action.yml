@@ -10,11 +10,11 @@ inputs:
 outputs:
   memory:
     description: "Memory usage calculated inside the container"
-    value: ${{ steps.run-script.outputs.memory-usage }}
+    # value: ${{ steps.run-script.outputs.memory-usage }}
 
 runs:
   using: "docker"
-  image: "${{ github.action_path }}/Dockerfile" # Builds the Dockerfile in this directory
+  image: "Dockerfile" # Builds the Dockerfile in this directory
 
   # Arguments passed to the ENTRYPOINT
   args:
