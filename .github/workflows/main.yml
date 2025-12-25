@@ -25,12 +25,12 @@ on:
         default: true
         
     # Secrets: Sensitive data passed by the app repo
-    secrets:
-      API_KEY:
-        required: true
-      # Optional secret (useful if some apps need DBs and others don't)
-      DB_PASSWORD:
-        required: false
+    # secrets:
+    #   API_KEY:
+    #     required: true
+    #   # Optional secret (useful if some apps need DBs and others don't)
+    #   DB_PASSWORD:
+    #     required: false
 
 # ------------------------------------------------------------------
 # GLOBAL CONCURRENCY (Save Money)
