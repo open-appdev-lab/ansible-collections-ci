@@ -38,9 +38,9 @@ on:
 # If you push to a PR branch twice quickly, this kills the old run.
 # Ideally, we only want to cancel PR builds, not main branch deploys.
 # This logic says: "If it's a PR, use the ref as the ID. If it's main, use the run ID (unique)."
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: true
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+#   cancel-in-progress: true
 
 jobs:
   secrets:

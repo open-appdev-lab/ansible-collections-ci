@@ -42,11 +42,11 @@ jobs:
   docker-job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
 
       - name: Run Docker Action
         id: my-docker
-        uses: ./.github/actions/dummy-container-task
+        uses: open-appdev-lab/ansible-collections-ci/.github/actions/dummy-container-task
         with:
           who-to-greet: 'Container User'
 
