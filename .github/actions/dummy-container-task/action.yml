@@ -14,7 +14,7 @@ outputs:
 
 runs:
   using: "docker"
-  image: "Dockerfile" # Builds the Dockerfile in this directory
+  image: "${{ github.action_path }}/Dockerfile" # Builds the Dockerfile in this directory
 
   # Arguments passed to the ENTRYPOINT
   args:
