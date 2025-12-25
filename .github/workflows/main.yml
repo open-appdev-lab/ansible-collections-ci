@@ -1,14 +1,36 @@
 name: CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
+  # workflow_dispatch:
+  workflow_call:
+    # Inputs: Configuration variables passed by the app repo
+    inputs:
+      ansible-version:
+        type: string
+        required: false
+        default: '2.20'
+      environment:
+        type: string
+        required: true
+        description: 'The target environment (e.g., staging, production)'
+      run-tests:
+        type: boolean
+        required: false
+        default: true
+        
+    # Secrets: Sensitive data passed by the app repo
+    secrets:
+      API_KEY:
+        required: true
+      # Optional secret (useful if some apps need DBs and others don't)
+      DB_PASSWORD:
+        required: false
 
 # ------------------------------------------------------------------
 # GLOBAL CONCURRENCY (Save Money)
