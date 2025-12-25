@@ -19,7 +19,7 @@ jobs:
 
     - name: Run local action
       id: custom-action1
-      uses: ./.github/actions/dummy
+      uses: ./.github/actions/semver-next
       with:
         placeholder-input1: 'GitHub Actions'
 
@@ -28,36 +28,36 @@ jobs:
     #     KEY: ${{ secrets.API_KEY }}
       run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"
 
-  job-ansible-validate-tokens:
-    runs-on: ubuntu-latest
-    # environment: ${{ inputs.environment }}
-    steps:
-    - uses: actions/checkout@v4
+  # job-ansible-validate-tokens:
+  #   runs-on: ubuntu-latest
+  #   # environment: ${{ inputs.environment }}
+  #   steps:
+  #   - uses: actions/checkout@v4
 
-    - name: Run local action
-      id: custom-action1
-      uses: ./.github/actions/dummy
-      with:
-        placeholder-input1: 'GitHub Actions'
+  #   - name: Run local action
+  #     id: custom-action1
+  #     uses: ./.github/actions/dummy
+  #     with:
+  #       placeholder-input1: 'GitHub Actions'
 
-    - name: Print Output
-    #   env:
-    #     KEY: ${{ secrets.API_KEY }}
-      run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"
+  #   - name: Print Output
+  #   #   env:
+  #   #     KEY: ${{ secrets.API_KEY }}
+  #     run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"
 
-  job-ansible-collection-install:
-    runs-on: ubuntu-latest
-    # environment: ${{ inputs.environment }}
-    steps:
-    - uses: actions/checkout@v4
+  # job-ansible-collection-install:
+  #   runs-on: ubuntu-latest
+  #   # environment: ${{ inputs.environment }}
+  #   steps:
+  #   - uses: actions/checkout@v4
 
-    - name: Run local action
-      id: custom-action1
-      uses: ./.github/actions/dummy
-      with:
-        placeholder-input1: 'GitHub Actions'
+  #   - name: Run local action
+  #     id: custom-action1
+  #     uses: ./.github/actions/dummy
+  #     with:
+  #       placeholder-input1: 'GitHub Actions'
 
-    - name: Print Output
-    #   env:
-    #     KEY: ${{ secrets.API_KEY }}
-      run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"
+  #   - name: Print Output
+  #   #   env:
+  #   #     KEY: ${{ secrets.API_KEY }}
+  #     run: echo " The random number was ${{ steps.custom-action1.outputs.placeholder-output1 }}"

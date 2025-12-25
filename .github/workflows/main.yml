@@ -28,13 +28,13 @@ jobs:
     # secrets_
     #   API_KEY: ${{ secrets.STAGING_KEY }}
 
-  # prepare:
-  #   needs: secrets
-  #   uses: ./.github/workflows/_prepare-stage.yml
-  #   # with:
-  #   #   environment: 'staging'
-  #   # secrets_
-  #   #   API_KEY: ${{ secrets.STAGING_KEY }}
+  prepare:
+    needs: secrets
+    uses: ./.github/workflows/_prepare-stage.yml
+    # with:
+    #   environment: 'staging'
+    # secrets_
+    #   API_KEY: ${{ secrets.STAGING_KEY }}
 
   # test:
   #   needs: prepare
