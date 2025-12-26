@@ -44,7 +44,7 @@ on:
 
 jobs:
   secrets:
-    uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_secrets-stage.yml@beta
+    uses: ./.github/workflows/_secrets-stage.yml
     # with:
     #   environment: 'staging'
     # secrets_
