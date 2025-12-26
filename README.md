@@ -84,3 +84,14 @@ Fix: Force act to use a massive, full-featured image (Warning: It's ~3GB+ downlo
 Bash
 
 act -P ubuntu-latest=catthehacker/ubuntu:full-latest
+
+
+
+
+
+semantic-release -v --noop version
+
+semantic-release version --print-tag
+
+- echo "NEXT_VERSION = $(semantic-release version --print-tag)" >> next_version.env
+- cat next_version.env

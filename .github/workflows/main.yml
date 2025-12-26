@@ -44,7 +44,7 @@ on:
 
 jobs:
   secrets:
-    uses: ./.github/workflows/_secrets-stage.yml
+    uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_secrets-stage.yml@beta
     # with:
     #   environment: 'staging'
     # secrets_
@@ -52,58 +52,58 @@ jobs:
 
   prepare:
     needs: secrets
-    uses: ./.github/workflows/_prepare-stage.yml
+    uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_prepare-stage.yml@beta
     # with:
     #   environment: 'staging'
     # secrets_
     #   API_KEY: ${{ secrets.STAGING_KEY }}
 
-  # test:
-  #   needs: prepare
-  #   uses: ./.github/workflows/_test-stage.yml
-  #   # with:
-  #   #   environment: 'staging'
-  #   # secrets_
-  #   #   API_KEY: ${{ secrets.STAGING_KEY }}
+  test:
+    needs: prepare
+    uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_test-stage.yml@beta
+    # with:
+    #   environment: 'staging'
+    # secrets_
+    #   API_KEY: ${{ secrets.STAGING_KEY }}
 
-  # report:
-  #   needs: test
-  #   uses: ./.github/workflows/_report-stage.yml
-  #   # with:
-  #   #   environment: 'staging'
-  #   # secrets_
-  #   #   API_KEY: ${{ secrets.STAGING_KEY }}
+  report:
+    needs: test
+    uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_report-stage.yml@beta
+    # with:
+    #   environment: 'staging'
+    # secrets_
+    #   API_KEY: ${{ secrets.STAGING_KEY }}
 
-  # release:
-  #   # if: github.ref == 'refs/heads/main'
-  #   needs: report
-  #   uses: ./.github/workflows/_release-stage.yml
-  #   # with:
-  #   #   environment: 'staging'
-  #   # secrets_
-  #   #   API_KEY: ${{ secrets.STAGING_KEY }}
+  release:
+    # if: github.ref == 'refs/heads/main'
+    needs: report
+    uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_release-stage.yml@beta
+    # with:
+    #   environment: 'staging'
+    # secrets_
+    #   API_KEY: ${{ secrets.STAGING_KEY }}
 
-  # publish:
-  #   # if: github.ref == 'refs/heads/main'
-  #   needs: release
-  #   uses: ./.github/workflows/_publish-stage.yml
-  #   # with:
-  #   #   environment: 'production'
-  #   # secrets_
-  #   #   API_KEY: ${{ secrets.STAGING_KEY }}
+  publish:
+    # if: github.ref == 'refs/heads/main'
+    needs: release
+    uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_publish-stage.yml@beta
+    # with:
+    #   environment: 'production'
+    # secrets_
+    #   API_KEY: ${{ secrets.STAGING_KEY }}
 
-  #   # Binds this job to the 'production' environment settings
-  #   # environment: 
-  #   #   name: production
-  #   #   url: https://my-prod.com
-  # # -------------------------------------------------------
-  #   # CONCURRENCY GROUP
-  #   # -------------------------------------------------------
-  #   concurrency:
-  #     # Create a unique lock ID. Hardcoding 'production' ensures 
-  #     # NO other workflow can touch prod while this runs.
-  #     group: production-deployment
+    # Binds this job to the 'production' environment settings
+    # environment: 
+    #   name: production
+    #   url: https://my-prod.com
+    # -------------------------------------------------------
+    # CONCURRENCY GROUP
+    # -------------------------------------------------------
+    concurrency:
+      # Create a unique lock ID. Hardcoding 'production' ensures 
+      # NO other workflow can touch prod while this runs.
+      group: production-deployment
       
-  #     # FALSE = "Wait in line" (Good for Deployments)
-  #     # TRUE  = "Kill the previous run" (Good for PR Builds)
-  #     cancel-in-progress: false
+      # FALSE = "Wait in line" (Good for Deployments)
+      # TRUE  = "Kill the previous run" (Good for PR Builds)
+      cancel-in-progress: false

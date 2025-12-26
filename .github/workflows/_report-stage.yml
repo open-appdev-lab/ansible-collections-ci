@@ -19,7 +19,7 @@ jobs:
 
     - name: Run local action
       id: custom-action1
-      uses: ./.github/actions/dummy
+      uses: open-appdev-lab/ansible-collections-ci/.github/actions/dummy@beta
       with:
         placeholder-input1: 'GitHub Actions'
 
