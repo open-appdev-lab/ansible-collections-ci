@@ -1,11 +1,11 @@
-name: "Placeholder name"
-description: "Placeholder description"
+name: "Resolve next version"
+description: "Use python-semantic-version to resolve the next release version"
 
 inputs: {}
 
 outputs:
   next-version:
-    description: "Placeholder description"
+    description: "Resolved next release version"
 
 runs:
   using: "docker"
