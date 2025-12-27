@@ -1,25 +1,12 @@
 name: "Placeholder name"
 description: "Placeholder description"
 
-inputs:
-  placeholder-input1:
-    description: "Placeholder description"
-    required: false
-    default: "World"
+inputs: {}
 
 outputs:
-  placeholder-output1:
+  next-version:
     description: "Placeholder description"
-    value: ${{ steps.placeholder-step-for-output1.outputs.random_id }}
 
 runs:
-  using: "composite"
-  steps:
-    - name: Print Greeting
-      shell: bash
-      run: echo "Hello ${{ inputs.placeholder-input1 }}!"
-
-    - name: Generate output1
-      id: placeholder-step-for-output1
-      shell: bash
-      run: echo "random_id=$RANDOM" >> $GITHUB_OUTPUT
+  using: "docker"
+  image: "Dockerfile" # Builds the Dockerfile in this directory
