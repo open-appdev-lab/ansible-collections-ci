@@ -39,12 +39,13 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global --add safe.directory .
-        if [ "${{ inputs.dry_run }}" = "true" ]; then
-          echo "Running in DRY RUN mode"
-          semantic-release -v version --dry-run
-        else
-          semantic-release -v version
+
+        NOOP_FLAG=""
+        if [ "${{ inputs.dry_run }}" == "true" ]; then
+          NOOP_FLAG="--noop"
         fi
+
+        semantic-release -v version $NOOP_FLAG
 
         NEXT_VERSION=$(semantic-release version --print)
         echo "next_version=$NEXT_VERSION" >> $GITHUB_ENV
