@@ -2,7 +2,7 @@
 name = "ci-python-env"
 version = "1.0.0"
 description = "Container image with python environment for building and publishing Ansible collections"
-authors = [{name = "Lucas Burigo", email = "burigolucas@no.span"}]
+authors = [{name = "Lucas Burigo", email = "burigolucas@users.noreply.github.com>"}]
 readme = "README.md"
 
 [tool.semantic_release]

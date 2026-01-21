@@ -7,10 +7,6 @@ on:
         type: string
         required: true
         description: "Container image including CI tooling"
-      ansible_requirements:
-        type: string
-        required: true
-        description: "Ansible collections dependencies"
       automation_hub_url:
         type: string
         required: true
@@ -131,42 +127,3 @@ jobs:
                 exit 1
             fi
         fi
-
-  ansible-collection-install:
-    runs-on: ubuntu-latest
-    container:
-      image: ${{ inputs.image }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Prepare | ansible-collection-install (1/2)
-      id: ansible-collection-install
-      env:
-          ANSIBLE_GALAXY_SERVER_LIST: automation_hub,upstream_galaxy
-          ANSIBLE_GALAXY_SERVER_UPSTREAM_GALAXY_URL: https://galaxy.ansible.com/
-          ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL: ${{ inputs.automation_hub_url }}
-          ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN: ${{ secrets.automation_hub_token }}
-      run: |
-        if [[ "$ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL" == *"console.redhat.com"* ]]; then
-            export ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
-        fi
-        ANSIBLE_COLLECTIONS_PATH=.ansible/collections
-        echo "Install collection dependencies"
-        ansible-galaxy collection install --force -p .ansible/collections -r ${{ inputs.ansible_requirements }} || RETURN=$?
-        if [[ 0 == $RETURN ]]; then
-          echo "Return code $RETURN matches expected return"
-          exit 0
-        fi
-        exit $RETURN
-
-    - name: Prepare | ansible-collection-install (2/2)
-      uses: actions/upload-artifact@v4
-      if: always() && steps.ansible-collection-install.outcome != 'skipped'
-      with:
-        name: local-ansible-collections
-        path: .ansible/
-        if-no-files-found: error
-        include-hidden-files: true

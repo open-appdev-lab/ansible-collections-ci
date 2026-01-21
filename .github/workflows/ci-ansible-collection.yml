@@ -64,7 +64,6 @@ jobs:
     uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_prepare-stage.yml@main
     with:
       image: ${{ inputs.image }}
-      ansible_requirements: ${{ inputs.ansible_requirements }}
       automation_hub_url: ${{ inputs.automation_hub_url }}
     secrets:
       automation_hub_token: ${{ secrets.automation_hub_token }}
@@ -75,6 +74,7 @@ jobs:
     with:
       image: ${{ inputs.image }}
       test_requirements: ${{ inputs.test_requirements}}
+      ansible_requirements: ${{ inputs.ansible_requirements }}
       tox_config_file: ${{ inputs.tox_config_file }}
       automation_hub_url: ${{ inputs.automation_hub_url }}
       lint_profile: "production"
