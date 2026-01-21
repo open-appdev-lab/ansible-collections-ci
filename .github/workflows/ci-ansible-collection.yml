@@ -104,7 +104,7 @@ jobs:
 
   release:
     if: |
-      github.ref == format('refs/heads/{0}', inputs.target_branch) || 
+      (github.event_name == 'push' && github.ref == format('refs/heads/{0}', inputs.target_branch)) || 
       (github.event_name == 'pull_request' && github.base_ref == inputs.target_branch)
     needs: report
     uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_release-stage.yml@main
@@ -113,7 +113,7 @@ jobs:
       packages: read
     with:
       image: ${{ inputs.image }}
-      dry_run: ${{ github.event_name == 'pull_request' }}
+      dry_run: ${{ github.event_name != 'push' }}
 
   publish:
     if: |
