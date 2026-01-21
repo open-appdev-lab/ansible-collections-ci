@@ -104,7 +104,8 @@ jobs:
 
   release:
     if: |
-      (github.event_name == 'push' && github.ref == format('refs/heads/{0}', inputs.target_branch)) || 
+      (github.event_name == 'workflow_dispatch' && github.ref == format('refs/heads/{0}', inputs.target_branch)) ||
+      (github.event_name == 'push' && github.ref == format('refs/heads/{0}', inputs.target_branch)) ||
       (github.event_name == 'pull_request' && github.base_ref == inputs.target_branch)
     needs: report
     uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_release-stage.yml@main
