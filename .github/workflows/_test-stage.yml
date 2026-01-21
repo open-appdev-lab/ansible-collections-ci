@@ -261,7 +261,7 @@ jobs:
           export ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
         fi
         ansible-galaxy collection list
-        if [ -f $TOX_CONFIG_FILE }} ]
+        if [ -f $TOX_CONFIG_FILE ]
         then
           tox --ansible --conf $TOX_CONFIG_FILE list
           tox --ansible --conf $TOX_CONFIG_FILE
