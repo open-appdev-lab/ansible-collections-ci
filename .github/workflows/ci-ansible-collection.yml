@@ -51,9 +51,9 @@ on:
         required: true
         description: 'The Authentication Token for the Automation Hub'
 
-# Ensures PRs don't block main, and main merges run one-by-one.
+# Ensures internal and external PRs don't block main, and main merges run one-by-one.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.head_ref || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' || github.ref != format('refs/heads/{0}', inputs.target_branch) }}
 
 # default: least privileged permissions across all jobs
