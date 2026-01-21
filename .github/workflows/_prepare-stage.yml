@@ -16,50 +16,50 @@ on:
       automation_hub_token:
         required: true
         description: 'The Authentication Token for the Hub'
-    outputs:
-      next_version:
-        description: "The version number generated"
-        value: ${{ jobs.semver-next.outputs.next_version }}
+    # outputs:
+    #   next_version:
+    #     description: "The version number generated"
+    #     value: ${{ jobs.semver-next.outputs.next_version }}
 
 jobs:
-  semver-next:
-    runs-on: ubuntu-latest
-    container:
-      image: ${{ inputs.image }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      next_version: ${{ steps.semver-next.outputs.next_version }}
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    # ONLY needed for PRs to fix the Detached HEAD error for python-semantic release
-    - name: Attach to Branch (Fix Detached HEAD)
-      if: github.event_name == 'pull_request'
-      run: |
-        git config --global --add safe.directory .
-        git checkout -B ${{ github.head_ref }}
-    - name: Prepare | semver-next
-      id: semver-next
-      run: |
-        git config --global --add safe.directory .
+  # semver-next:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: ${{ inputs.image }}
+  #     credentials:
+  #       username: ${{ github.actor }}
+  #       password: ${{ secrets.GITHUB_TOKEN }}
+  #   outputs:
+  #     next_version: ${{ steps.semver-next.outputs.next_version }}
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       fetch-depth: 0
+  #   # ONLY needed for PRs to fix the Detached HEAD error for python-semantic release
+  #   - name: Attach to Branch (Fix Detached HEAD)
+  #     if: github.event_name == 'pull_request'
+  #     run: |
+  #       git config --global --add safe.directory .
+  #       git checkout -B ${{ github.head_ref }}
+  #   - name: Prepare | semver-next
+  #     id: semver-next
+  #     run: |
+  #       git config --global --add safe.directory .
 
-        LAST_VERSION=$(semantic-release version --print-last-released)
-        NEXT_VERSION=$(semantic-release version --print)
+  #       LAST_VERSION=$(semantic-release version --print-last-released)
+  #       NEXT_VERSION=$(semantic-release version --print)
 
-        echo "LAST_VERSION=$LAST_VERSION" >> $GITHUB_ENV
-        echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+  #       echo "LAST_VERSION=$LAST_VERSION" >> $GITHUB_ENV
+  #       echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
 
-        if [ "$LAST_VERSION" != "$NEXT_VERSION" ]; then
-          echo "🚀 A new version will be created: $NEXT_VERSION"
-          echo "next_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
-        else
-          echo "💤 No release needed. Version remains: $LAST_VERSION"
-        fi
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       if [ "$LAST_VERSION" != "$NEXT_VERSION" ]; then
+  #         echo "🚀 A new version will be created: $NEXT_VERSION"
+  #         echo "next_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+  #       else
+  #         echo "💤 No release needed. Version remains: $LAST_VERSION"
+  #       fi
+  #     env:
+  #       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ansible-validate-tokens:
     runs-on: ubuntu-latest

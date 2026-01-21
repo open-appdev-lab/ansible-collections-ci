@@ -8,6 +8,14 @@ on:
         required: false
         default: "main"
         description: "The primary branch used for releases (e.g., main or master)"
+      ref:
+        type: string
+        required: true
+        description: "Reference used on checkout code"
+      repo:
+        type: string
+        required: true
+        description: "Repository used on checkout code"
       image:
         type: string
         required: false
@@ -58,6 +66,9 @@ permissions:
 jobs:
   secrets:
     uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_secrets-stage.yml@main
+    with:
+      ref: ${{ inputs.ref }}
+      repo: ${{ inputs.repo }}
 
   prepare:
     needs: secrets 
@@ -72,6 +83,8 @@ jobs:
     needs: prepare
     uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_test-stage.yml@main
     with:
+      ref: ${{ inputs.ref }}
+      repo: ${{ inputs.repo }}
       image: ${{ inputs.image }}
       test_requirements: ${{ inputs.test_requirements}}
       ansible_requirements: ${{ inputs.ansible_requirements }}

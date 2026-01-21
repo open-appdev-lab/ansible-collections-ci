@@ -3,6 +3,14 @@ name: Test stage
 on:
   workflow_call:
     inputs:
+      ref:
+        type: string
+        required: true
+        description: "Reference used on checkout code"
+      repo:
+        type: string
+        required: true
+        description: "Repository used on checkout code"
       image:
         type: string
         required: true
@@ -78,6 +86,9 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.ref }}
+        repository: ${{ inputs.repo }}
     - name: Install python dependencies
       env:
         TEST_REQUIREMENTS: "${{ inputs.test_requirements }}"
@@ -179,6 +190,9 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.ref }}
+        repository: ${{ inputs.repo }}
     - name: Install python dependencies
       env:
         TEST_REQUIREMENTS: "${{ inputs.test_requirements }}"
@@ -213,6 +227,9 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.ref }}
+        repository: ${{ inputs.repo }}
     - name: Install python dependencies
       env:
         TEST_REQUIREMENTS: "${{ inputs.test_requirements }}"
