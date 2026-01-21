@@ -81,7 +81,7 @@ jobs:
     - name: Install python dependencies
       env:
         TEST_REQUIREMENTS: "${{ inputs.test_requirements }}"
-      run:
+      run: |
         echo "Install pip requirements when test_requirements input is specified"
         if [[ "$TEST_REQUIREMENTS" != "" ]]; then pip install -r $TEST_REQUIREMENTS; fi
     - name: Install collections
@@ -91,7 +91,7 @@ jobs:
         ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL: ${{ inputs.automation_hub_url }}
         ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN: ${{ secrets.automation_hub_token }}
         ANSIBLE_REQUIREMENTS: "${{ inputs.ansible_requirements }}"
-      run:
+      run: |
         if [[ "$ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL" == *"console.redhat.com"* ]]; then
           export ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
         fi
@@ -101,7 +101,7 @@ jobs:
       env:
         SARIF_REPORT_FULL_PATH: "./code-quality-report.sarif"
         LINT_ARGS: ""
-      run: |       
+      run: |
         # Add the ansible-lint profile
         if [[ "${{ inputs.lint_profile }}" != "" ]]; then
           LINT_ARGS+=" --profile ${{ inputs.lint_profile }}";
@@ -182,7 +182,7 @@ jobs:
     - name: Install python dependencies
       env:
         TEST_REQUIREMENTS: "${{ inputs.test_requirements }}"
-      run:
+      run: |
         echo "Install pip requirements when test_requirements input is specified"
         if [[ "$TEST_REQUIREMENTS" != "" ]]; then pip install -r $TEST_REQUIREMENTS; fi
     - name: Install collections
@@ -192,7 +192,7 @@ jobs:
         ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL: ${{ inputs.automation_hub_url }}
         ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN: ${{ secrets.automation_hub_token }}
         ANSIBLE_REQUIREMENTS: "${{ inputs.ansible_requirements }}"
-      run:
+      run: |
         if [[ "$ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL" == *"console.redhat.com"* ]]; then
           export ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
         fi
@@ -216,7 +216,7 @@ jobs:
     - name: Install python dependencies
       env:
         TEST_REQUIREMENTS: "${{ inputs.test_requirements }}"
-      run:
+      run: |
         echo "Install pip requirements when test_requirements input is specified"
         if [[ "$TEST_REQUIREMENTS" != "" ]]; then pip install -r $TEST_REQUIREMENTS; fi
     - name: Install collections
@@ -226,7 +226,7 @@ jobs:
         ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL: ${{ inputs.automation_hub_url }}
         ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN: ${{ secrets.automation_hub_token }}
         ANSIBLE_REQUIREMENTS: "${{ inputs.ansible_requirements }}"
-      run:
+      run: |
         if [[ "$ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL" == *"console.redhat.com"* ]]; then
           export ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
         fi
