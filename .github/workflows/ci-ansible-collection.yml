@@ -55,6 +55,7 @@ on:
 permissions:
   contents: read
   packages: read
+  security-events: none
 
 jobs:
   secrets:
@@ -75,6 +76,10 @@ jobs:
   test:
     needs: prepare
     uses: open-appdev-lab/ansible-collections-ci/.github/workflows/_test-stage.yml@main
+    permissions:
+      contents: read
+      packages: read
+      security-events: read
     with:
       ref: ${{ inputs.ref }}
       repo: ${{ inputs.repo }}
