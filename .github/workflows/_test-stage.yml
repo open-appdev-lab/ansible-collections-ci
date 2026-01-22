@@ -172,7 +172,10 @@ jobs:
           exit 0
         fi
         exit $RETURN
-
+    - name: Upload SARIF report
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: code-quality-report.sarif
     - name: Upload code quality report
       uses: actions/upload-artifact@v4
       if: always() && steps.ansible-lint.outcome != 'skipped'
