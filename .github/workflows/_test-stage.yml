@@ -173,7 +173,7 @@ jobs:
         fi
         exit $RETURN
     - name: Upload SARIF report
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: code-quality-report.sarif
     - name: Upload code quality report
@@ -185,6 +185,7 @@ jobs:
         if-no-files-found: error
 
   ansible-tox-sanity:
+    needs: ansible-lint
     runs-on: ubuntu-latest
     container:
       image: ${{ inputs.image }}
@@ -222,6 +223,7 @@ jobs:
         tox
 
   ansible-tox-integration:
+    needs: ansible-lint
     runs-on: ubuntu-latest
     container:
       image: ${{ inputs.image }}

@@ -53,6 +53,7 @@ on:
 
 # default: least privileged permissions across all jobs
 permissions:
+  actions: none
   contents: read
   packages: read
   security-events: none
@@ -79,7 +80,8 @@ jobs:
     permissions:
       contents: read
       packages: read
-      security-events: read
+      security-events: write
+      actions: read
     with:
       ref: ${{ inputs.ref }}
       repo: ${{ inputs.repo }}
