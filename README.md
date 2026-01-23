@@ -67,7 +67,9 @@ jobs:
     uses: open-appdev-lab/ansible-collections-ci/.github/workflows/ci-ansible-collection.yml@main
     permissions:
       contents: write
-      packages: read
+      packages: write
+      security-events: write
+      actions: read
     with:
       target_branch: 'main'
       ref: ${{ github.sha }}
