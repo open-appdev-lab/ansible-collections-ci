@@ -68,7 +68,6 @@ jobs:
     - name: Catch-up with changes in default branch
       if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
       run: |
-        # This solves the 'fatal: not in a git directory' caused by ownership mismatch
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
         # Ensure we are in the workspace
@@ -84,7 +83,6 @@ jobs:
     - name: Attach to Branch (Fix Detached HEAD)
       if: github.event_name == 'pull_request'
       run: |
-        # This solves the 'fatal: not in a git directory' caused by ownership mismatch
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
         # Ensure we are in the workspace
