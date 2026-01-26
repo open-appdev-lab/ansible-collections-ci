@@ -67,7 +67,7 @@ jobs:
         fetch-depth: 0
         token: ${{ steps.select_token.outputs.auth_token }}
     - name: Catch-up with changes in default branch
-      if: github.event_name == 'push'
+      if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
       run: |
         # Give the Merge Queue 30 seconds to land other pending PRs 
         # so they can be bundled into this single release run.
@@ -75,6 +75,7 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         # This pulls the PSR commit from the PREVIOUS merge
+        git config --global --add safe.directory .
         git pull origin ${{ inputs.target_branch }} --rebase
     # ONLY needed for PRs to fix the Detached HEAD error for python-semantic release
     - name: Attach to Branch (Fix Detached HEAD)
