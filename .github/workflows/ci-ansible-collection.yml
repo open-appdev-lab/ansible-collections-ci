@@ -120,6 +120,7 @@ jobs:
       contents: write
       packages: read
     with:
+      target_branch: ${{ inputs.target_branch }}
       image: ${{ inputs.image }}
       dry_run: ${{ github.event_name != 'push' }}
     secrets:

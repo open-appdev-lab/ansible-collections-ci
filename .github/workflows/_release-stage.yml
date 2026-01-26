@@ -3,6 +3,11 @@ name: Release stage
 on:
   workflow_call:
     inputs:
+      target_branch:
+        type: string
+        required: false
+        default: "main"
+        description: "The primary branch used for releases (e.g., main or master)"
       image:
         type: string
         required: true
@@ -61,6 +66,13 @@ jobs:
       with:
         fetch-depth: 0
         token: ${{ steps.select_token.outputs.auth_token }}
+    - name: Catch-up with changes in default branch
+      if: github.event_name == 'push'
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        # This pulls the PSR commit from the PREVIOUS merge
+        git pull origin ${{ inputs.target_branch }} --rebase
     # ONLY needed for PRs to fix the Detached HEAD error for python-semantic release
     - name: Attach to Branch (Fix Detached HEAD)
       if: github.event_name == 'pull_request'
