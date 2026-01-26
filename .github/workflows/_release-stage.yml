@@ -69,6 +69,9 @@ jobs:
     - name: Catch-up with changes in default branch
       if: github.event_name == 'push'
       run: |
+        # Give the Merge Queue 30 seconds to land other pending PRs 
+        # so they can be bundled into this single release run.
+        sleep 30
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         # This pulls the PSR commit from the PREVIOUS merge
