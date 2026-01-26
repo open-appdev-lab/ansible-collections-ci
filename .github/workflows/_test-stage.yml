@@ -3,10 +3,10 @@ name: Test stage
 on:
   workflow_call:
     inputs:
-      target_branch:
-        type: string
-        required: true
-        description: "The primary branch used for releases (e.g., main or master)"
+      # target_branch:
+      #   type: string
+      #   required: true
+      #   description: "The primary branch used for releases (e.g., main or master)"
       ref:
         type: string
         required: true
@@ -177,13 +177,13 @@ jobs:
         fi
         exit $RETURN
     - name: Upload SARIF report
-      if: always() && steps.ansible-lint.outcome != 'skipped'
+      if: always() && steps.ansible-lint.outcome != 'skipped' && github.event_name != 'merge_group' && github.event_name != 'workflow_dispatch'
       uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: code-quality-report.sarif
         # Explicitly set the ref and sha to bypass Merge Queue naming issues
-        ref: refs/heads/${{ github.event.pull_request.base.ref || inputs.target_branch }}
-        sha: ${{ inputs.ref }}
+        # ref: refs/heads/${{ github.event.pull_request.base.ref || inputs.target_branch }}
+        # sha: ${{ inputs.ref }}
     - name: Upload code quality report
       uses: actions/upload-artifact@v4
       if: always() && steps.ansible-lint.outcome != 'skipped'

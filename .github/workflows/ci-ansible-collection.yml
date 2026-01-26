@@ -89,7 +89,7 @@ jobs:
       security-events: write
       actions: read
     with:
-      target_branch: ${{ inputs.target_branch }}
+      # target_branch: ${{ inputs.target_branch }}
       ref: ${{ inputs.ref }}
       repo: ${{ inputs.repo }}
       image: ${{ inputs.image }}
