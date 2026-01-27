@@ -98,8 +98,15 @@ jobs:
       env:
         GH_TOKEN: ${{ steps.select_token.outputs.auth_token }}
       run: |
-        git config --global --add safe.directory .
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        
+        # Ensures GitHub sees the APP as the pusher
+        git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
 
+        # Standard Git Config
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        
         NOOP_FLAG=""
         if [ "${{ inputs.dry_run }}" == "true" ]; then
           NOOP_FLAG="--noop"
