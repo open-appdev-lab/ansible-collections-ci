@@ -106,7 +106,7 @@ jobs:
         # Standard Git Config
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        
+
         NOOP_FLAG=""
         if [ "${{ inputs.dry_run }}" == "true" ]; then
           NOOP_FLAG="--noop"
@@ -118,7 +118,10 @@ jobs:
         echo "LAST_VERSION=$LAST_VERSION" >> $GITHUB_ENV
         echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
 
-        semantic-release $NOOP_FLAG -v version
+        git check-ignore -v . || true
+        git remote -v
+        
+        semantic-release $NOOP_FLAG -vv version
     - name: Release | set-sematic_release-outputs
       id: set-output
       run: |
