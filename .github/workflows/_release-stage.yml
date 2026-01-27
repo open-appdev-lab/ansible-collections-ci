@@ -100,12 +100,12 @@ jobs:
       run: |
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
         
-        # Ensures GitHub sees the APP as the pusher
-        git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+        ## Ensures GitHub sees the APP as the pusher
+        #git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
 
         # Standard Git Config
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
+        #git config user.name "github-actions[bot]"
+        #git config user.email "github-actions[bot]@users.noreply.github.com"
 
         NOOP_FLAG=""
         if [ "${{ inputs.dry_run }}" == "true" ]; then
@@ -118,9 +118,9 @@ jobs:
         echo "LAST_VERSION=$LAST_VERSION" >> $GITHUB_ENV
         echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
 
-        git check-ignore -v . || true
-        git remote -v
-        
+        #git check-ignore -v . || true
+        #git remote -v
+
         semantic-release $NOOP_FLAG -vv version
     - name: Release | set-sematic_release-outputs
       id: set-output
