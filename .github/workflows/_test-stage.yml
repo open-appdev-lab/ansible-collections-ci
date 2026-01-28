@@ -123,7 +123,7 @@ jobs:
         # Run antsibull-changelog release to update changelog and delete fragments
         antsibull-changelog release -v --version $NEXT_VERSION
 
-        #echo "✅ Changelog updated successfully!"
+        echo "✅ Changelog updated successfully!"
 
   ansible-lint:
     runs-on: ubuntu-latest
