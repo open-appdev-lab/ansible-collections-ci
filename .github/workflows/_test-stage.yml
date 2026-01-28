@@ -81,6 +81,31 @@ on:
         description: 'The Authentication Token for the Hub'
 
 jobs:
+  changelog-lint:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.image }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.ref }}
+        repository: ${{ inputs.repo }}
+    - name: Lint changelog fragments
+      run: |
+        LAST_VERSION=$(semantic-release version --print-last-released)
+        NEXT_VERSION=$(semantic-release version --print)
+
+        # Create fragments based on commit messages
+        . ./scripts/create-changelog-fragments.sh $LAST_VERSION $NEXT_VERSION
+
+        # Lint fragments
+        antsibull-changelog lint && echo "✅ All changelog fragments passed linting!" || exit 1
+
+        # Run antsibull-changelog release to update changelog and delete fragments
+        antsibull-changelog release -v --version $NEXT_VERSION || echo "❌ Error: Failed to update changelog" &&  exit 1
   ansible-lint:
     runs-on: ubuntu-latest
     container:
@@ -190,7 +215,7 @@ jobs:
         if-no-files-found: error
 
   ansible-tox-sanity:
-    needs: ansible-lint
+    needs: [ansible-lint,changelog-lint]
     runs-on: ubuntu-latest
     container:
       image: ${{ inputs.image }}
@@ -228,7 +253,7 @@ jobs:
         tox
 
   ansible-tox-integration:
-    needs: ansible-lint
+    needs: [ansible-lint,changelog-lint]
     runs-on: ubuntu-latest
     container:
       image: ${{ inputs.image }}
