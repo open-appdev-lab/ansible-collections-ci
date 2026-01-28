@@ -95,6 +95,8 @@ jobs:
         repository: ${{ inputs.repo }}
     - name: Lint changelog fragments
       run: |
+        git config --global --add safe.directory .
+
         LAST_VERSION=$(semantic-release version --print-last-released)
         NEXT_VERSION=$(semantic-release version --print)
 
